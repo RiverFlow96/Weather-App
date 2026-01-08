@@ -9,6 +9,7 @@ const Card = () => {
     const [humidity, setHumidity] = useState('')
     const [weatherMain, setWeatherMain] = useState('')
     const [weatherDescription, setWeatherDescription] = useState('')
+    const [error, setError] = useState('')
 
     const showWeather = async (event: FormEvent) => {
         event.preventDefault()
@@ -25,7 +26,7 @@ const Card = () => {
             setWeatherDescription(data.weather[0].description)
             setHumidity(data.main.humidity)
         } catch (error) {
-
+            setError(error.message)
         }
 
     }
@@ -58,6 +59,9 @@ const Card = () => {
             <h2 className='font-bold text-2xl'>{weatherMain && `Clima: ${weatherMain}`}</h2>
             <h2 className='font-bold text-2xl'>{weatherDescription && `Description: ${weatherDescription}`}</h2>
             <h2 className='font-bold text-2xl'>{humidity && `Humedad: ${humidity}%`}</h2>
+
+            {error && <h2 className='font-bold text-2xl text-red-800'>{error}</h2>}
+
         </div>
     )
 }
